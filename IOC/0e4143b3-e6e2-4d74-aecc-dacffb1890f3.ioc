@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="0e4143b3-e6e2-4d74-aecc-dacffb1890f3" last-modified="2014-09-08T11:15:16" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>INC-2061</short_description>
+  <description>https://www.virustotal.com/en/file/c7ce1812838aecbc8a925760320584a0c610dfbb1d2c9a87e9c76166946872e9/analysis/
+
+dropped:
+https://www.virustotal.com/en/file/ab1477064f74c0da5b9ad7bc1b852749a4816740b8789546ef5e47b5b5146d01/analysis/</description>
+  <authored_by>ft44k</authored_by>
+  <authored_date>2014-09-08T10:54:51</authored_date>
+  <links />
+  <definition>
+    <Indicator operator="OR" id="a839d106-282d-4658-9b72-d5314784695d">
+      <IndicatorItem id="687fa584-82c3-4bb0-9c9f-e1b322c2dd6e" condition="is">
+        <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+        <Content type="md5">bddcf5d55b12803a119d200e271cafa1</Content>
+      </IndicatorItem>
+      <IndicatorItem id="31eb2ec8-82d5-4e15-ab16-ad5b8317b72c" condition="is">
+        <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+        <Content type="md5">6c5db8ded5f8c842a015b328ad9ab94a</Content>
+      </IndicatorItem>
+      <Indicator operator="AND" id="b7f8cf87-7d99-409a-a50a-7b0c626d934b">
+        <IndicatorItem id="d8ba90bf-e5b1-4f5a-8885-2e5aa437ef2f" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/arguments" type="mir" />
+          <Content type="string">\AppData\Roaming\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="be24018c-5018-474f-b1a5-da6c8267c941" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/arguments" type="mir" />
+          <Content type="string">.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="be13b3c1-577f-44b3-bd82-890264dedbbe" condition="is">
+          <Context document="ProcessItem" search="ProcessItem/name" type="mir" />
+          <Content type="string">iexplore.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="us-ascii"?>
-<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="1c3abadc-c800-43cf-b693-36d945e56dc6" last-modified="2014-03-21T13:17:52" xmlns="http://schemas.mandiant.com/2010/ioc">
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="1c3abadc-c800-43cf-b693-36d945e56dc6" last-modified="2014-05-22T15:13:01" xmlns="http://schemas.mandiant.com/2010/ioc">
   <short_description>Zbot</short_description>
   <description>Zbot</description>
   <authored_by>ft44k</authored_by>
@@ -15,25 +15,41 @@
         <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
         <Content type="md5">46b71932f84d67dc1d58b6ff868e78c2</Content>
       </IndicatorItem>
+      <IndicatorItem id="e794a003-9fde-41ca-8542-a6e7f7b90038" condition="is">
+        <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+        <Content type="md5">4b99d2d5143ac9ac162bd424e0ce1cdc</Content>
+      </IndicatorItem>
       <Indicator operator="AND" id="228e468d-fa50-4cf5-9ee2-5a3bbf08169a">
         <IndicatorItem id="a9bf3add-dd5f-4a5a-999c-47dd6da4d244" condition="contains">
           <Context document="RegistryItem" search="RegistryItem/Path" type="mir" />
           <Content type="string">Software\Microsoft\Windows\CurrentVersion\Run\</Content>
         </IndicatorItem>
-        <IndicatorItem id="2ff5cdbe-f70c-4639-bc6e-ffc4e0826de3" condition="contains">
-          <Context document="RegistryItem" search="RegistryItem/Text" type="mir" />
-          <Content type="string">\Local\Temp\</Content>
-        </IndicatorItem>
+        <Indicator operator="OR" id="c2691414-b617-4929-b19d-c061f66f0caf">
+          <IndicatorItem id="2ff5cdbe-f70c-4639-bc6e-ffc4e0826de3" condition="contains">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir" />
+            <Content type="string">\Local\Temp\</Content>
+          </IndicatorItem>
+          <IndicatorItem id="a73a9bc4-3e1d-4093-8001-d6551df81c83" condition="contains">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir" />
+            <Content type="string">\Local Settings\Temp\</Content>
+          </IndicatorItem>
+        </Indicator>
       </Indicator>
       <Indicator operator="AND" id="eb6e1eb7-c08a-4415-a0d0-62bf1d5acf29">
         <IndicatorItem id="ed056285-0b45-4b95-a39f-d8fe2f2694f1" condition="contains">
           <Context document="RegistryItem" search="RegistryItem/Path" type="mir" />
           <Content type="string">FirewallPolicy\FirewallRules\TCP Query</Content>
         </IndicatorItem>
-        <IndicatorItem id="449bca80-949b-4ddd-a960-7ca3c8f8d133" condition="contains">
-          <Context document="RegistryItem" search="RegistryItem/Text" type="mir" />
-          <Content type="string">\local\temp\</Content>
-        </IndicatorItem>
+        <Indicator operator="OR" id="78642c80-3ac3-4d6f-bdaf-d9bb8683adf2">
+          <IndicatorItem id="449bca80-949b-4ddd-a960-7ca3c8f8d133" condition="contains">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir" />
+            <Content type="string">\local\temp\</Content>
+          </IndicatorItem>
+          <IndicatorItem id="724c69b3-eaac-41c3-b9dc-a6c30bd4f103" condition="contains">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir" />
+            <Content type="string">\Local Settings\Temp\</Content>
+          </IndicatorItem>
+        </Indicator>
       </Indicator>
       <Indicator operator="AND" id="38487378-27e1-421d-868b-335888dcb9a5">
         <IndicatorItem id="c254d82e-42f8-42fc-a96d-eec941876999" condition="contains">

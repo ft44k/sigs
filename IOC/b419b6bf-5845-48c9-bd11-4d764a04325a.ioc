@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="b419b6bf-5845-48c9-bd11-4d764a04325a" last-modified="2014-06-05T12:40:32" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>APT Newscaster</short_description>
+  <description>NEWSCASTER 
+Iranian Cyber Espionage Campaign, reported on May 28, 2014
+
+online article available here:
+http://www.isightpartners.com/2014/05/newscaster-iranian-threat-inside-social-media/
+http://thehackernews.com/2014/05/iranian-hackers-pose-as-journalists-to.html
+http://blog.cylance.com/a-study-in-bots-newscaster</description>
+  <authored_by>ft44k</authored_by>
+  <authored_date>2014-06-02T11:39:11</authored_date>
+  <links />
+  <definition>
+    <Indicator operator="OR" id="51aec8eb-5d0b-40f3-bb15-99754251cba0">
+      <Indicator operator="OR" id="730df571-4ce9-43db-8d5b-7a67f42093ff">
+        <IndicatorItem id="20772ba7-83ac-46e2-8e9c-6cdf5539abf5" condition="contains">
+          <Context document="DnsEntryItem" search="DnsEntryItem/Host" type="mir" />
+          <Content type="string">internetexplorers.org</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0966cb0b-2fe9-400e-9bf9-d14692470ea2" condition="contains">
+          <Context document="DnsEntryItem" search="DnsEntryItem/Host" type="mir" />
+          <Content type="string">.mcafeea.com</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8db18fa5-f45c-42f9-8101-da9989f75cee" condition="contains">
+          <Context document="DnsEntryItem" search="DnsEntryItem/Host" type="mir" />
+          <Content type="string">VBOXSVR.ovh.net</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="0a17d561-a8e8-411a-91d5-075fde08e812">
+        <Indicator operator="OR" id="eba29b2c-7041-4f01-b04d-b8fd057ab5e0">
+          <IndicatorItem id="ee6e0084-94f7-4216-ac15-f140ba35d914" condition="contains">
+            <Context document="FileItem" search="FileItem/FilePath" type="mir" />
+            <Content type="string">\Temp\lpt1</Content>
+          </IndicatorItem>
+          <IndicatorItem id="3a6549ef-2337-45df-a99e-b32e04958c4d" condition="contains">
+            <Context document="FileItem" search="FileItem/FilePath" type="mir" />
+            <Content type="string">\WindowsUpdate\System</Content>
+          </IndicatorItem>
+        </Indicator>
+        <Indicator operator="OR" id="f87bc58a-1bad-4297-b4d1-813759d87108">
+          <IndicatorItem id="9534b402-6a14-4ac0-a633-f6922983fed5" condition="contains">
+            <Context document="FileItem" search="FileItem/FileName" type="mir" />
+            <Content type="string">Isass.exe</Content>
+          </IndicatorItem>
+          <IndicatorItem id="0f8e9353-2d5a-4ebc-aaf5-280e17a51aca" condition="contains">
+            <Context document="FileItem" search="FileItem/FileName" type="mir" />
+            <Content type="string">driver</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="OR" id="48fa046b-eb8e-40df-8677-03ddd70abbcb">
+        <IndicatorItem id="13ee84fc-1ad3-4e4b-be33-39a7695e5f6b" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">0c66db47cae6950e78a76fcacc7f5b8b</Content>
+        </IndicatorItem>
+        <IndicatorItem id="af6b3e4c-7a47-43cf-9034-eb042b1d5284" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">4e7a9a58ceb07d111fd57174b9fc29e5</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3a7b8719-8ab4-4850-b103-40941b259236" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">4f064b3a9b230e18cbd3745a49592d26</Content>
+        </IndicatorItem>
+        <IndicatorItem id="bae3e613-b7b8-4fde-a5a3-783854a78bde" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">7224d82bcbed0663afd1a296c587f6bf</Content>
+        </IndicatorItem>
+        <IndicatorItem id="74210455-0095-44c6-80f3-87f8e551ced6" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">994a376df0f799725fd609e125ea8efe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f93c0d92-e042-43c8-974b-cbb5090d00b1" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">b08e84277e0f2221f187dd97273ee643</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3d95bbb1-0516-48b2-84f7-3dbb0d9fd0a5" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">b2e6de2255946219e02872e3fc330e60</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5c1510a7-6d95-4030-b0f8-2ea3fecd5f10" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">baa6d4d60d77dc120cf545df5d755eaf</Content>
+        </IndicatorItem>
+        <IndicatorItem id="de4b2b2d-8bab-4e0c-bc29-6a2927349d39" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">c30d0f1b6f8c25ec49bbca32beb6513b</Content>
+        </IndicatorItem>
+        <IndicatorItem id="9fd3fbbd-23ff-4711-9577-c38a44bef5ec" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">dfa72a90fdaf914756cd1f860a45f35b</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2f79a1c8-58b7-4b84-b58f-7edc21326b85" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">f5d4f59b2cb6a98bfeadf595a29f9ca2</Content>
+        </IndicatorItem>
+        <IndicatorItem id="50586139-5177-46b3-b588-c1156892f2b4" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">faeb660d03beec1abfb960b1bfab2211</Content>
+        </IndicatorItem>
+        <IndicatorItem id="d382a19b-d38e-4022-94e7-a17f3240b7f2" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">c5317613ce272d891f584d480a312606</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2ee47e43-ce79-4c44-a21a-9119c35b38db" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">0f73206141fc1545f72314f7bf011b05</Content>
+        </IndicatorItem>
+        <IndicatorItem id="44ea81a0-4590-407a-956a-f43181cfce86" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">780bfc0b88083edd56f150ccd87e3f8e</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="OR" id="af8ef279-8faa-45d8-b04b-8b74b8f3ab6a">
+        <IndicatorItem id="126f960a-0d89-44b3-b0ad-db03cf7998af" condition="is">
+          <Context document="ProcessItem" search="ProcessItem/HandleList/Handle/Name" type="mir" />
+          <Content type="string">afOneCopyMutex</Content>
+        </IndicatorItem>
+        <IndicatorItem id="56f09bf7-fca5-4b09-a225-70252bcdfb29" condition="is">
+          <Context document="ProcessItem" search="ProcessItem/name" type="mir" />
+          <Content type="string">Isass.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>

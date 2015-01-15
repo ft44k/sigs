@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="1690b154-3971-49cb-97fd-05318d839bce" last-modified="2014-08-19T13:42:34" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>Backoff POS</short_description>
+  <description>US-CERT TA14-212A
+description
+?	Scraping memory for track data
+?	Logging keystrokes
+?	Command &amp; control (C2) communication
+?	Injecting malicious stub into explorer.exe
+</description>
+  <authored_by>ft44k</authored_by>
+  <authored_date>2014-08-19T11:59:04</authored_date>
+  <links />
+  <definition>
+    <Indicator operator="OR" id="642ed318-0190-470b-bc52-83855805543b">
+      <Indicator operator="OR" id="b7e65d36-462f-4aaa-a058-b02b51731e3e">
+        <IndicatorItem id="c6dc1096-3aa3-41ef-b968-cecab9429df6" condition="contains">
+          <Context document="FileItem" search="FileItem/FilePath" type="mir" />
+          <Content type="string">AdobeFlashPlayer\mswinsvc.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="e9ccb967-9dae-4cd3-84e5-e4afb6de47a8" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">6A0E49C5E332DF3AF78823CA4A655AE8</Content>
+        </IndicatorItem>
+        <IndicatorItem id="d0d4797d-1ce2-46d9-b82a-b78aba21cfb2" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">927AE15DBF549BD60EDCDEAFB49B829E</Content>
+        </IndicatorItem>
+        <IndicatorItem id="a7cb9652-040c-476c-9c8b-96b41461b19d" condition="contains">
+          <Context document="FileItem" search="FileItem/FileName" type="mir" />
+          <Content type="string">mskrnl</Content>
+        </IndicatorItem>
+        <IndicatorItem id="6ce69771-69b6-4db1-ac22-eec9a6034675" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">F5B4786C28CCF43E569CB21A6122A97E</Content>
+        </IndicatorItem>
+        <IndicatorItem id="82f4ca27-c511-4709-9218-a4e798a69111" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">CA4D58C61D463F35576C58F25916F25</Content>
+        </IndicatorItem>
+        <IndicatorItem id="03c0a129-c4bf-416c-97b3-7c06c5a724f6" condition="contains">
+          <Context document="FileItem" search="FileItem/FilePath" type="mir" />
+          <Content type="string">AdobeFlashPlayer\mswinhost.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="c9ec328b-9946-493b-be95-284c6615df75" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">17E1173F6FC7E920405F8DBDE8C9ECAC</Content>
+        </IndicatorItem>
+        <IndicatorItem id="bb5e635d-5deb-4d4e-8bf4-862ded514a8f" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">D397D2CC9DE41FB5B5D897D1E665C549</Content>
+        </IndicatorItem>
+        <IndicatorItem id="73e73247-3ffd-493f-8379-06b230ae553a" condition="contains">
+          <Context document="FileItem" search="FileItem/FileName" type="mir" />
+          <Content type="string">nsskrnl</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0482042d-177f-453d-9ee0-06dad5d84b11" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">21E61EB9F5C1E1226F9D69CBFD1BF61</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3ec822bc-faf0-4a98-9cc5-a5791d38a208" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">CA608E7996DED0E5009DB6CC54E08749</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ca8fa0d9-d56e-4d72-9768-aac78598550c" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">0607CE9793EEA0A42819957528D92B02</Content>
+        </IndicatorItem>
+        <IndicatorItem id="9d9b87c9-f040-49ef-b0a9-ea3e7a87d256" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">5C1474EA275A05A2668B823D055858D9</Content>
+        </IndicatorItem>
+        <IndicatorItem id="79c422a7-989b-4e09-beb7-b579bf922183" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">12C9C0BC18FDF98189457A9D112EEBFC</Content>
+        </IndicatorItem>
+        <IndicatorItem id="7ff58ba8-1799-4217-9835-01060bf1dd9c" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">205947B57D41145B857DE18E43EFB794</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="OR" id="693b1996-cdc1-4543-80f7-6ac62c77a68b">
+        <IndicatorItem id="ee78ada8-28c2-4e7b-b6d1-8bcf16dc9053" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/HandleList/Handle/Name" type="mir" />
+          <Content type="string">uhYtntr56uisGst</Content>
+        </IndicatorItem>
+        <IndicatorItem id="385e644d-102a-451e-bdde-5c9739131526" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/HandleList/Handle/Name" type="mir" />
+          <Content type="string">uyhnJmkuTgD</Content>
+        </IndicatorItem>
+        <IndicatorItem id="694bea55-07ec-43c0-bc02-2dce48c18596" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/HandleList/Handle/Name" type="mir" />
+          <Content type="string">Undsa8301nskal</Content>
+        </IndicatorItem>
+        <IndicatorItem id="95c9e2e6-dbd0-4b6d-9c94-2042e0b301fb" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/HandleList/Handle/Name" type="mir" />
+          <Content type="string">uyhnJmkuTgD</Content>
+        </IndicatorItem>
+        <IndicatorItem id="22bdca25-1ca6-4003-97ae-08c48c865b78" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/HandleList/Handle/Name" type="mir" />
+          <Content type="string">nUndsa8301nskal</Content>
+        </IndicatorItem>
+        <IndicatorItem id="dde9c7a1-b4be-4abd-9854-072346fcf0e3" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/HandleList/Handle/Name" type="mir" />
+          <Content type="string">nuyhnJmkuTgD</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="OR" id="f89ed8b7-aa54-4b33-babb-a23a9e8f603f">
+        <IndicatorItem id="df75e302-b781-4585-99a4-0cc25f7a74b4" condition="contains">
+          <Context document="RegistryItem" search="RegistryItem/Path" type="mir" />
+          <Content type="string">HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\identifier</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3a8eb2c0-6a30-49b2-9b6d-c743a15a1501" condition="contains">
+          <Context document="RegistryItem" search="RegistryItem/Path" type="mir" />
+          <Content type="string">HKCU\SOFTWARE \Microsoft\Windows\CurrentVersion\Run\Windows NT Service</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3daf3b79-1fb0-46fa-9bce-6ca5daa257fa" condition="contains">
+          <Context document="RegistryItem" search="RegistryItem/Path" type="mir" />
+          <Content type="string">HKCU\SOFTWARE\Microsoft\Active Setup\Installed Components\{B3DB0D62-B481-4929-888B-49F426C1A136}\StubPath</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3be82787-bdf7-42fb-afb7-b6c44cee6c36" condition="contains">
+          <Context document="RegistryItem" search="RegistryItem/Path" type="mir" />
+          <Content type="string">HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components\{B3DB0D62-B481-4929-888B-49F426C1A136}\StubPath</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>

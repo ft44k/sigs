@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="ec117e9e-ca63-45ea-a28b-9bb6655cd08f" last-modified="2015-01-15T07:50:13" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>BHEK v2</short_description>
+  <description>BHEK 
+
+https://malwr.com/analysis/NDI2OWNjNzZjOTljNDc4N2JkOGU3MzM2ZTI0MTcxZWY/
+https://www.virustotal.com/en/file/716c5369b598fb0873b9eeaacae55e9e16ce04d33a8b6b22f6e5315e76e771fb/analysis/</description>
+  <authored_by>ft44k</authored_by>
+  <authored_date>2013-06-12T10:52:14</authored_date>
+  <links />
+  <definition>
+    <Indicator operator="OR" id="1d2452ad-cbe2-4166-bdd9-fca89a4c27f7">
+      <Indicator operator="AND" id="51233c67-da5d-4ca2-af4d-09475f81fd3e">
+        <IndicatorItem id="f23096c1-7cd0-46bb-86eb-a48c673717fd" condition="is">
+          <Context document="ProcessItem" search="ProcessItem/arguments" type="mir" />
+          <Content type="string">c:\WINDOWS\system32\svchost.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="21b51792-fdda-4f75-be72-58457cd70386" condition="containsnot">
+          <Context document="ProcessItem" search="ProcessItem/Username" type="mir" />
+          <Content type="string">NT AUTHORITY\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="53733ebb-af17-440a-b550-9783adeec471" condition="is">
+          <Context document="ProcessItem" search="ProcessItem/name" type="mir" />
+          <Content type="string">svchost.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="29638072-e9fb-41f4-80e1-2257be609472" condition="is">
+          <Context document="ProcessItem" search="ProcessItem/SectionList/MemorySection/Injected" type="mir" />
+          <Content type="string">True</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>

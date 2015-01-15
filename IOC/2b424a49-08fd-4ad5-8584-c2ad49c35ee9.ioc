@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="2b424a49-08fd-4ad5-8584-c2ad49c35ee9" last-modified="2014-12-17T15:07:25" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>Phase Bot</short_description>
+  <description>fileless rootkit
+
+http://www.malwaretech.com/2014/12/phase-bot-fileless-rootkit.html</description>
+  <authored_by>ft44k</authored_by>
+  <authored_date>2014-12-17T08:58:56</authored_date>
+  <links />
+  <definition>
+    <Indicator operator="OR" id="a4c0dc67-0577-403c-b556-667961939ebf">
+      <Indicator operator="AND" id="379bde84-38c6-4dd2-afee-5680ea3a00b0">
+        <IndicatorItem id="9bad2dd4-43ff-457b-8e5d-b15ea1020cff" condition="contains">
+          <Context document="RegistryItem" search="RegistryItem/Path" type="mir" />
+          <Content type="string">Software\Microsoft\Active Setup\Installed Components</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="3b474232-5b8a-4664-b57e-041f0619e1f4">
+          <IndicatorItem id="3462722f-ccf8-4815-b2aa-8993b8b9e791" condition="contains">
+            <Context document="RegistryItem" search="RegistryItem/ValueName" type="mir" />
+            <Content type="string">Rc4Encoded32</Content>
+          </IndicatorItem>
+          <IndicatorItem id="82ac3fe4-c6c9-440e-8ff1-bd05451a354d" condition="contains">
+            <Context document="RegistryItem" search="RegistryItem/ValueName" type="mir" />
+            <Content type="string">Rc4Encoded64</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="c90655a3-1a97-47a0-b1c4-9ee298b24419">
+        <IndicatorItem id="1ac3c0a8-a31d-4634-ac3b-d15fb383b801" condition="contains">
+          <Context document="RegistryItem" search="RegistryItem/Path" type="mir" />
+          <Content type="string">Software\Microsoft\Active Setup\Installed Components</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5aedc51a-c41f-47c0-b0f1-a8142a2dea62" condition="contains">
+          <Context document="RegistryItem" search="RegistryItem/Text" type="mir" />
+          <Content type="string">sPowerShellScript =</Content>
+        </IndicatorItem>
+        <IndicatorItem id="91612b35-b536-44ee-a7b9-d58496a7c30e" condition="contains">
+          <Context document="RegistryItem" search="RegistryItem/ValueName" type="mir" />
+          <Content type="string">JavaScript</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="90f72e11-8912-4191-802a-a35c1a02c059">
+        <IndicatorItem id="1fd9b812-b8ef-4c10-925d-bddde2f88237" condition="contains">
+          <Context document="RegistryItem" search="RegistryItem/Path" type="mir" />
+          <Content type="string">Software\Microsoft\Windows\CurrentVersion\Run</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="84e8f258-598a-48bd-b5dc-3c87727d4334">
+          <IndicatorItem id="f224878f-a4ab-4371-a106-3728cf0c13f0" condition="contains">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir" />
+            <Content type="string">undll32.exe javascript:</Content>
+          </IndicatorItem>
+          <IndicatorItem id="73aeae52-27d6-46a1-8d99-db94c64d89ed" condition="contains">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir" />
+            <Content type="string">XObject("WScript.Shell")).RegRead</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>

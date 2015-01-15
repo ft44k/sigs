@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="6d554b17-7222-4e8c-9ab7-aa2ef98f771d" last-modified="2015-01-15T07:50:13" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>Cridex</short_description>
+  <description>attachment:
+ e7999440008ed5955327818c217690b2
+
+downloaded:
+ 85359d5568f3d12f9e442959eac757ab
+
+about: cridex is a banking trojan. Interesting thing about this malware is the persistance mechanism. The HKU Run key is used, however as soon as the malware injects the explorer the entry is removed and created back only during the shutdown procedure...so if you do hard a reset it will be gone.
+
+Its configuration is stored in registry, but it is encrypted, so not very easy to use with IOC.
+
+Injected explorer contains the following strings:
+httpinjects
+formgrabber
+vnc_x32
+vnc_x64
+clickshots
+urls used by this variant: 
+kev.org.tr/333
+sunfung.hk/333
+druyer.fr/333
+</description>
+  <authored_by>ft44k</authored_by>
+  <authored_date>2014-09-19T18:00:40</authored_date>
+  <links>
+    <link rel="threatgroup">Banking Trojan</link>
+  </links>
+  <definition>
+    <Indicator operator="OR" id="65fc0201-9998-4c2c-81e9-34d76b518273">
+      <Indicator operator="AND" id="02e32b7a-c634-4b5a-9835-44fd5abe28c7">
+        <IndicatorItem id="585ec89b-1114-4866-9242-76947f57ccb7" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/SectionList/MemorySection/Injected" type="mir" />
+          <Content type="string">True</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8214a756-3c2d-4570-9d9e-dca9cf674476" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/name" type="mir" />
+          <Content type="string">Explorer.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="062852ea-686d-4473-a6dc-522adf5bf364">
+        <IndicatorItem id="c1e399b1-fd9d-4b18-bc9d-bbfaf231660a" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/name" type="mir" />
+          <Content type="string">Explorer.exe</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="6af6fa4e-57bd-4560-b61b-4cf5cc9774a3">
+          <IndicatorItem id="18940ab7-d2fa-47f9-bf06-76748d767bd4" condition="contains">
+            <Context document="ProcessItem" search="ProcessItem/StringList/string" type="mir" />
+            <Content type="string">httpinjects</Content>
+          </IndicatorItem>
+          <IndicatorItem id="4b6aa6b7-f2b9-43a8-a10b-1bcad3f981e5" condition="contains">
+            <Context document="ProcessItem" search="ProcessItem/StringList/string" type="mir" />
+            <Content type="string">formgrabber</Content>
+          </IndicatorItem>
+          <IndicatorItem id="1fe62720-aafd-4020-addb-303ffbdf5c32" condition="contains">
+            <Context document="ProcessItem" search="ProcessItem/StringList/string" type="mir" />
+            <Content type="string">vnc_x32</Content>
+          </IndicatorItem>
+          <IndicatorItem id="64141100-fa6a-4db8-817a-efc1883d4d0e" condition="contains">
+            <Context document="ProcessItem" search="ProcessItem/StringList/string" type="mir" />
+            <Content type="string">vnc_x64</Content>
+          </IndicatorItem>
+          <IndicatorItem id="92436e14-a20c-48a2-82f2-cf1dc327a4df" condition="contains">
+            <Context document="ProcessItem" search="ProcessItem/StringList/string" type="mir" />
+            <Content type="string">clickshots</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="7e431f19-23ce-43ff-8048-7b4c01a688bd" last-modified="2014-08-04T10:17:51" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>citadel</short_description>
+  <description>http://securityaffairs.co/wordpress/27274/malware/new-citadel-trojan-variant.html</description>
+  <authored_by>ft44k</authored_by>
+  <authored_date>2014-08-04T10:10:37</authored_date>
+  <links />
+  <definition>
+    <Indicator operator="OR" id="8893e9f2-9192-41ee-a37a-aade962c2bbc">
+      <IndicatorItem id="f230881f-943a-4346-9eba-c8e50a95652d" condition="contains">
+        <Context document="UserItem" search="UserItem/Username" type="mir" />
+        <Content type="string">coresystem</Content>
+      </IndicatorItem>
+    </Indicator>
+  </definition>
+</ioc>

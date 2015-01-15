@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="6943b248-f98a-4108-ab02-c6c682837592" last-modified="2015-01-15T07:50:14" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>Toolz</short_description>
+  <description>- psexec (a283e768fa12ef33087f07b01f82d6dd)
+
+- pwdump2 (ca0447d2feccc4a5ac3c9128d61debe7)
+- pwdump6 (7a198abd552a68832b90688cba249b5e)</description>
+  <authored_by>ft44k</authored_by>
+  <authored_date>2014-03-07T14:29:48</authored_date>
+  <links />
+  <definition>
+    <Indicator operator="OR" id="ede097c1-c126-4d53-a054-b985841a4141">
+      <Indicator operator="OR" id="26968374-a0ec-49ea-9ed8-65fd2d0e737f">
+        <IndicatorItem id="765ac4ed-4a3e-4cf4-91d5-82146c4adcdb" condition="contains">
+          <Context document="ServiceItem" search="ServiceItem/name" type="mir" />
+          <Content type="string">PSEXESVC</Content>
+        </IndicatorItem>
+        <IndicatorItem id="8dfc2c15-9b18-4a83-8a94-54af5c7dd680" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">a283e768fa12ef33087f07b01f82d6dd</Content>
+        </IndicatorItem>
+        <IndicatorItem id="4067ef9e-73b0-4e01-9c26-343f08464951" condition="contains">
+          <Context document="FileItem" search="FileItem/FileName" type="mir" />
+          <Content type="string">psexec</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="OR" id="6e8ece8e-b0aa-43af-b64d-c0989d9bf339">
+        <IndicatorItem id="995f46b5-822b-4c85-a077-921e5aaf14bb" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">ca0447d2feccc4a5ac3c9128d61debe7</Content>
+        </IndicatorItem>
+        <IndicatorItem id="5c771962-22e3-4de9-b397-6d9ef22eee4f" condition="contains">
+          <Context document="FileItem" search="FileItem/FileName" type="mir" />
+          <Content type="string">pwdump</Content>
+        </IndicatorItem>
+        <IndicatorItem id="fd926596-9fb6-42bb-98a7-d712b51df5b7" condition="is">
+          <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+          <Content type="md5">7a198abd552a68832b90688cba249b5e</Content>
+        </IndicatorItem>
+        <Indicator operator="AND" id="f8da440e-2de7-41ef-b945-8392eded4c3d">
+          <IndicatorItem id="737fe004-f2db-4b1e-b78a-fa1d26535354" condition="contains">
+            <Context document="FileItem" search="FileItem/PEInfo/ImportedModules/Module/ImportedFunctions/string" type="mir" />
+            <Content type="string">CreateRemoteThread</Content>
+          </IndicatorItem>
+          <IndicatorItem id="6dbfe75c-7d50-4536-b3d4-9f792c784b29" condition="contains">
+            <Context document="FileItem" search="FileItem/PEInfo/ImportedModules/Module/ImportedFunctions/string" type="mir" />
+            <Content type="string">WriteProcessMemory</Content>
+          </IndicatorItem>
+          <IndicatorItem id="ae6a14a3-4da5-47a2-a6ef-88bd732710bb" condition="contains">
+            <Context document="FileItem" search="FileItem/PEInfo/ImportedModules/Module/ImportedFunctions/string" type="mir" />
+            <Content type="string">VirtualAllocEx</Content>
+          </IndicatorItem>
+          <IndicatorItem id="fe88c033-b2f8-45cd-8440-12386a3aef34" condition="contains">
+            <Context document="FileItem" search="FileItem/PEInfo/ImportedModules/Module/ImportedFunctions/string" type="mir" />
+            <Content type="string">OpenProcess</Content>
+          </IndicatorItem>
+          <IndicatorItem id="0acbca16-0e4e-4f42-8533-5f6cbc0816b8" condition="contains">
+            <Context document="FileItem" search="FileItem/PEInfo/ImportedModules/Module/ImportedFunctions/string" type="mir" />
+            <Content type="string">NtQuerySystemInformation</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>

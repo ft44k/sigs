@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="12667309-b74a-4292-bfeb-816755310f0f" last-modified="2015-01-15T07:50:13" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>Dyre</short_description>
+  <description>http://phishme.com/project-dyre-new-rat-slurps-bank-credentials-bypasses-ssl/
+
+downloaded 1509uk4.tar from bondageandsteel.co.uk/css/1509uk4.tar
+persistance:
+HKU\..\Software\Microsoft\Windows\CurrentVersion\Run\
+
+C:\Documents and Settings\tester\Application Data\MuTGqNFiKwleuSF.exe
+
+TODO:
+test against Win7 image</description>
+  <authored_by>ft44k</authored_by>
+  <authored_date>2014-09-18T13:48:30</authored_date>
+  <links>
+    <link rel="threatgroup">Banking Trojan</link>
+  </links>
+  <definition>
+    <Indicator operator="OR" id="b4b0b08f-6240-44e5-9bd4-ea271b6c9ce5">
+      <IndicatorItem id="abdf75ce-bdda-4925-a105-22ace97914a0" condition="contains">
+        <Context document="ProcessItem" search="ProcessItem/HandleList/Handle/Name" type="mir" />
+        <Content type="string">553wwerdty7</Content>
+      </IndicatorItem>
+      <IndicatorItem id="8b501ed1-888f-40c1-8806-19a7b0008879" condition="contains">
+        <Context document="ProcessItem" search="ProcessItem/HandleList/Handle/Name" type="mir" />
+        <Content type="string">cmvn5e4d4r</Content>
+      </IndicatorItem>
+      <Indicator operator="AND" id="888b1a70-56ab-459f-ae85-3b2fc8dc9039">
+        <IndicatorItem id="6d5e4989-5b66-46d3-b12f-015a8ae0ee31" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/SectionList/MemorySection/Injected" type="mir" />
+          <Content type="string">True</Content>
+        </IndicatorItem>
+        <IndicatorItem id="d28da455-2d8c-4e42-9c23-3f312cb3a6d6" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/name" type="mir" />
+          <Content type="string">Explorer.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="111f7c22-fe44-466e-b995-68b5c66d2750">
+        <IndicatorItem id="4b9bb5b4-5bf3-4767-8f4b-098aba655c15" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/StringList/string" type="mir" />
+          <Content type="string">Wget/1.9+cvs</Content>
+        </IndicatorItem>
+        <IndicatorItem id="af4cfdee-5675-4c9d-a3d0-ff2f730366ac" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/name" type="mir" />
+          <Content type="string">Explorer.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>

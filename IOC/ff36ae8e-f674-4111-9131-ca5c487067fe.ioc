@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="ff36ae8e-f674-4111-9131-ca5c487067fe" last-modified="2015-01-15T07:50:14" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>Vulnerable SW</short_description>
+  <description>IOC that could discover vulnerable PCs
+-&gt; dont forget to change the text value to the latest one</description>
+  <authored_by>ft44k</authored_by>
+  <authored_date>2014-06-09T10:55:40</authored_date>
+  <links />
+  <definition>
+    <Indicator operator="OR" id="d7ab3b1a-2157-4cc6-bf97-881f81dc7e34">
+      <Indicator operator="AND" id="febd2e20-dcdc-4358-b398-d67968cda31a">
+        <IndicatorItem id="6659b58e-0ab0-40a8-b823-616aa2a61368" condition="contains">
+          <Context document="RegistryItem" search="RegistryItem/Path" type="mir" />
+          <Content type="string">HKEY_LOCAL_MACHINE\SOFTWARE\Macromedia\FlashPlayerPlugin\</Content>
+        </IndicatorItem>
+        <IndicatorItem id="0c34a7ae-dbe0-460f-8446-e9602e5e0f38" condition="is">
+          <Context document="RegistryItem" search="RegistryItem/ValueName" type="mir" />
+          <Content type="string">Version</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="98b5c86f-ff9a-4212-8b31-d400f984c0e9">
+          <IndicatorItem id="e66c1c7d-3f7d-40d4-98e2-c390b9261b84" condition="isnot">
+            <Context document="RegistryItem" search="RegistryItem/Text" type="mir" />
+            <Content type="string">13.0.0.214</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>

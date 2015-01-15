@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="748dfbf6-5754-4a10-b188-c134e593c4bd" last-modified="2015-01-15T07:50:13" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>GameOver Zeus</short_description>
+  <description>attachments:
+53d3257c39e896d765321cd8f6585a85
+593f6a92abcf382bbb263e37d6bcf4de
+
+Opens an RTF file and downloads another executable on the background (rtf file is harmless)
+
+Hashes in the IOC are of the files that were downloaded
+</description>
+  <authored_by>ft44k</authored_by>
+  <authored_date>2014-09-09T10:23:05</authored_date>
+  <links />
+  <definition>
+    <Indicator operator="OR" id="7c726ea2-4af5-4a13-85fb-d638d7bdb93b">
+      <IndicatorItem id="6faf71a0-e90c-457a-97f1-07bde1281050" condition="is">
+        <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+        <Content type="md5">0f8bc251207c3015344a47ab3233a114</Content>
+      </IndicatorItem>
+      <IndicatorItem id="6fa73ba3-d1a4-4100-94cd-9f300639e26d" condition="is">
+        <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+        <Content type="md5">04fa2fc809d6356976896f3cb94f113b</Content>
+      </IndicatorItem>
+      <IndicatorItem id="c814ef0d-422b-4af3-965c-2ba21de5ab02" condition="is">
+        <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+        <Content type="md5">d2da4f34a5f5ecdf8e1eec73a659cb31</Content>
+      </IndicatorItem>
+      <Indicator operator="AND" id="874a4366-f84f-4359-a3fa-f2cf64c951dc">
+        <IndicatorItem id="03079106-5bf5-4a50-ad3b-e5e3d03524a5" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/SectionList/MemorySection/Injected" type="mir" />
+          <Content type="string">true</Content>
+        </IndicatorItem>
+        <Indicator operator="OR" id="52a7e31f-58f3-4d32-bc54-47f4cbacb255">
+          <IndicatorItem id="c8891d6b-b035-43a7-9ea0-dbfd0b6795d2" condition="contains">
+            <Context document="ProcessItem" search="ProcessItem/arguments" type="mir" />
+            <Content type="string">\AppData\Local\Temp\</Content>
+          </IndicatorItem>
+          <IndicatorItem id="b9e37e8d-bfad-4b80-a30b-910ed39f9d3f" condition="contains">
+            <Context document="ProcessItem" search="ProcessItem/arguments" type="mir" />
+            <Content type="string">\Local Settings\Temp\</Content>
+          </IndicatorItem>
+        </Indicator>
+      </Indicator>
+      <Indicator operator="AND" id="1f3b9931-da8c-4c3a-b7a6-b734c7414c42">
+        <IndicatorItem id="d2227bce-af5b-4f68-9972-8025d9a330a5" condition="contains">
+          <Context document="DnsEntryItem" search="DnsEntryItem/RecordName" type="mir" />
+          <Content type="string">.biz</Content>
+        </IndicatorItem>
+        <IndicatorItem id="a3dc3a2d-b0da-4073-a3a4-8f2273f39027" condition="contains">
+          <Context document="DnsEntryItem" search="DnsEntryItem/RecordName" type="mir" />
+          <Content type="string">.org</Content>
+        </IndicatorItem>
+        <IndicatorItem id="2fab7fea-60d0-4a6d-87b8-281c77000ac7" condition="contains">
+          <Context document="DnsEntryItem" search="DnsEntryItem/RecordName" type="mir" />
+          <Content type="string">.com</Content>
+        </IndicatorItem>
+        <IndicatorItem id="41ba18e5-1ea0-4f22-a86b-f258755b306d" condition="contains">
+          <Context document="DnsEntryItem" search="DnsEntryItem/RecordName" type="mir" />
+          <Content type="string">.net</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>
