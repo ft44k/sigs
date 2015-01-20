@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="10f16b85-b965-46e9-a6ae-97ccaa4336cc" last-modified="2015-01-20T08:35:27" xmlns="http://schemas.mandiant.com/2010/ioc">
+  <short_description>Skeleton Key</short_description>
+  <description>IOC based on CTU report
+http://www.secureworks.com/cyber-threat-intelligence/threats/skeleton-key-malware-analysis/
+
+</description>
+  <authored_by>ft44k</authored_by>
+  <authored_date>2015-01-20T08:19:16</authored_date>
+  <links>
+    <link rel="threatgroup">APT</link>
+  </links>
+  <definition>
+    <Indicator operator="OR" id="1e1ed353-5a13-46b7-ba27-05c8aad2d308">
+      <IndicatorItem id="a30146dc-b00c-4205-aed8-33f8de716a07" condition="is">
+        <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+        <Content type="md5">bf45086e6334f647fda33576e2a05826</Content>
+      </IndicatorItem>
+      <IndicatorItem id="40874cef-0f0e-4a08-b736-90ed16c17cf3" condition="is">
+        <Context document="FileItem" search="FileItem/FileName" type="mir" />
+        <Content type="string">ole64.dll</Content>
+      </IndicatorItem>
+      <IndicatorItem id="1f12f0ff-6b14-4c09-b53e-ac35f8cefdd6" condition="is">
+        <Context document="FileItem" search="FileItem/Md5sum" type="mir" />
+        <Content type="md5">66da7ed621149975f6e643b4f9886cfd</Content>
+      </IndicatorItem>
+      <IndicatorItem id="f79582bf-a945-44b1-91c7-c5ef4d9fd48b" condition="is">
+        <Context document="FileItem" search="FileItem/FileName" type="mir" />
+        <Content type="string">msuta64.dll</Content>
+      </IndicatorItem>
+      <Indicator operator="AND" id="d3d293bc-75b1-426f-8d15-e52ad6548c9c">
+        <IndicatorItem id="665b5693-e5f4-47e2-837b-7800aeb07df1" condition="is">
+          <Context document="FileItem" search="FileItem/PEInfo/Exports/ExportedFunctions/string" type="mir" />
+          <Content type="string">uu</Content>
+        </IndicatorItem>
+        <IndicatorItem id="ba3cf7c7-3705-4d6b-9625-266606922201" condition="is">
+          <Context document="FileItem" search="FileItem/PEInfo/Exports/ExportedFunctions/string" type="mir" />
+          <Content type="string">ii</Content>
+        </IndicatorItem>
+        <IndicatorItem id="02ae5dc5-a002-4e16-abec-add473a998c3" condition="is">
+          <Context document="FileItem" search="FileItem/PEInfo/Exports/ExportedFunctions/string" type="mir" />
+          <Content type="string">DllEntryPoint</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="69c23e0f-1ed9-430c-b776-4f67e57d57f5">
+        <IndicatorItem id="9c4f1468-cbd0-419d-af52-a6c625b9930b" condition="is">
+          <Context document="FileItem" search="FileItem/PEInfo/Exports/ExportedFunctions/string" type="mir" />
+          <Content type="string">i</Content>
+        </IndicatorItem>
+        <IndicatorItem id="24f3c7f6-0cb3-41ac-81a6-f7469a2d1b28" condition="is">
+          <Context document="FileItem" search="FileItem/PEInfo/Exports/ExportedFunctions/string" type="mir" />
+          <Content type="string">u</Content>
+        </IndicatorItem>
+        <IndicatorItem id="604bf035-507e-462a-bee0-e746a9ad2628" condition="is">
+          <Context document="FileItem" search="FileItem/PEInfo/Exports/ExportedFunctions/string" type="mir" />
+          <Content type="string">DllEntryPoint </Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="846df4e1-3016-4397-baa8-433609169120">
+        <IndicatorItem id="bf16c893-5641-4091-b85c-f6c397073af9" condition="is">
+          <Context document="EventLogItem" search="EventLogItem/EID" type="mir" />
+          <Content type="int">7045</Content>
+        </IndicatorItem>
+        <IndicatorItem id="10caa264-d4e5-4fda-ba62-924344a19563" condition="contains">
+          <Context document="EventLogItem" search="EventLogItem/log" type="mir" />
+          <Content type="string">PSEXESVC.exe</Content>
+        </IndicatorItem>
+      </Indicator>
+      <Indicator operator="AND" id="c22c7529-c89e-42b3-b969-4eda36e1d991">
+        <IndicatorItem id="66b25fe7-c49d-4b38-b009-b6f3977ea4a2" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/name" type="mir" />
+          <Content type="string">lsass.exe</Content>
+        </IndicatorItem>
+        <IndicatorItem id="f87eb4d8-5f51-457d-beff-4d532625cf79" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/StringList/string" type="mir" />
+          <Content type="string">CDLocateCSystem</Content>
+        </IndicatorItem>
+        <IndicatorItem id="57bba84f-1f79-406c-894a-c86f39bd77e3" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/StringList/string" type="mir" />
+          <Content type="string">SamIRetrievePrimaryCredentials</Content>
+        </IndicatorItem>
+        <IndicatorItem id="3f221a6f-dcd7-4322-b6ae-ac991f946846" condition="contains">
+          <Context document="ProcessItem" search="ProcessItem/StringList/string" type="mir" />
+          <Content type="string">SamIRetrieveMultiplePrimaryCredentials</Content>
+        </IndicatorItem>
+      </Indicator>
+    </Indicator>
+  </definition>
+</ioc>
